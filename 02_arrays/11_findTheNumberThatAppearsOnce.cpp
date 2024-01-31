@@ -23,6 +23,19 @@ int getSingleElement(vector<int> &arr){
 
 //--------------------------------------------------------------------------------------------
 
+//-----------------------------------OPTIMAL - using XOR ---------------------------------------------
+
+int getSingleElement(vector<int> &arr){
+    int xorResult = 0;
+    int n = arr.size();
+
+    for(int i = 0; i < n; i++){
+        xorResult = xorResult ^ arr[i];
+    }
+    return xorResult;
+}
+
+//------------------------------------------------------------------------------------------------------
 
 int main()
 {
