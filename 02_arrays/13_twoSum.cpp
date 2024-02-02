@@ -1,4 +1,5 @@
 #include<iostream>
+#include <unordered_map>
 #include<vector>
 using namespace std;
 
@@ -19,6 +20,21 @@ vector<int> twoSum(vector<int>& nums, int target) {
     }
 
 //--------------------------------------------------------------------------
+
+//----------------------------Better Approach---------------------------------
+
+vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> mpp;
+    for(int i = 0; i < nums.size(); i++){
+        int element = nums[i];
+        int anotherElement = target - element;
+        if(mpp.find(anotherElement) != mpp.end()){
+            return{mpp[anotherElement], i};
+        }
+        mpp[element] = i;
+    }
+    return {-1, -1};
+}
 
 int main()
 {
