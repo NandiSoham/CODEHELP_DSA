@@ -23,23 +23,49 @@ using namespace std;
 
 //--------------------BETTER APPROACH -> using HASHING---------------------------
 
-int findMajorityElement(vector<int> &arr){
-    unordered_map<int, int> mpp;
+// int findMajorityElement(vector<int> &arr){
+//     unordered_map<int, int> mpp;
 
-    for(int i = 0; i < arr.size(); i++){
-        mpp[arr[i]]++;
-    }
+//     for(int i = 0; i < arr.size(); i++){
+//         mpp[arr[i]]++;
+//     }
 
-    for(auto it: mpp){
-        if(it.second > (arr.size()/2)){
-            return it.first;
-        }
-    }
+//     for(auto it: mpp){
+//         if(it.second > (arr.size()/2)){
+//             return it.first;
+//         }
+//     }
 
-    return -1;
-}
+//     return -1;
+// }
 
 //-----------------------------------------------------------------------------
+
+//------------------------OPTIMAL APPROACH -> Moore’s Voting Algorithm -------------------
+int findMajorityElement(vector<int>& nums) {
+        int element;
+        int count = 0;
+        for(int i = 0; i < nums.size(); i++){
+            if(count == 0){
+                count = 1;
+                element = nums[i];
+            } else if(nums[i] == element) count++;
+            else count--;
+        }
+
+        int appearedCount = 0;
+
+        for(int i = 0; i < nums.size(); i++){
+            if(nums[i] == element) appearedCount++;
+            if(appearedCount > nums.size()/2){
+                return element;
+            }
+        }
+
+        return -1;
+    }
+
+//--------------------------------------------------------------------------------------
 
 int main()
 {
