@@ -1,13 +1,11 @@
-vector<int> twoSum(vector<int>& nums, int target) {
-//         vector <int> ans;
-//         for(int i = 0; i <nums.size(); i++){
-//             for(int j = i; j < nums.size(); j++){
-//                 if(nums[i] + nums[j] == target && i != j){
-//                     ans.push_back(i);
-//                     ans.push_back(j);
-//                     return ans;
-//                 }
-//             }
-//         }
-//         return{-1, -1};
-//     }
+int findMaxSubarraySum(int arr[], int n){
+    int maxi = INT_MIN;
+    for(int i = 0; i < n; i++){
+        int sum = 0;
+        for(int j = i; j < n; j++){
+            sum += arr[j];
+            maxi = max(maxi, sum);
+        }
+    }
+    return maxi;
+}
