@@ -24,7 +24,7 @@ vector<int> rearrangeElement(vector<int> & arr){
 
 //-------------------------- Optimal-------------------------------------------
 
-vector<int> rearrangeElement(vector<int> &arr){
+vector<int> rearrangeElementFind(vector<int> &arr){
     int n = arr.size();
     vector<int> ans(n,0);
     int posIndex = 0, negIndex = 1;
@@ -47,9 +47,17 @@ int main()
 {
     vector<int> arr {1,4,-2,7,-6,-1};
     vector<int> ans = rearrangeElement(arr);
+    vector<int> ans2 = rearrangeElementFind(arr);
     cout << "after rearrange by sign the array is: " << endl;
-    for(int i = 0; i < arr.size(); i++){
+    for(int i = 0; i < ans.size(); i++){
         cout << ans[i] << " ";
+    }
+
+    cout << endl;
+    
+    cout << "after rearrange by sign in better approach the array is: " << endl;
+    for(int i = 0; i < ans2.size(); i++){
+        cout << ans2[i] << " ";
     }
     return 0;
 }
