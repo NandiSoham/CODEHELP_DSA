@@ -44,7 +44,7 @@ vector<int> rearrangeElementSecondVariety(vector<int>&a) {
 
 int main()
 {
-    vector<int> arr {1,4,-2,7,-6,9, 5, 4};
+    vector<int> arr {1,4,-2,7,-6,9, 5, 4}; 
     vector<int> ans = rearrangeElementSecondVariety(arr);
     cout << "after rearrange by sign the array is: " << endl;
     for(int i = 0; i < ans.size(); i++){
