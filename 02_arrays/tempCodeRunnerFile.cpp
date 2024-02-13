@@ -1,22 +1,35 @@
-int longestConsecutiveSequenceOptimal(vector<int> &arr){
-    int longest = 1;
-    unordered_set<int> st;
-
-    if(arr.size() == 0) return 0;
-
-    for(int i = 0; i < arr.size(); i++){
-        st.insert(arr[i]);
-    }
-    for(auto it : st){
-        if(st.find(it - 1) == st.end()){
-            int cnt = 1;
-            int x = it;
-            while(st.find(x+1) != st.end()) {
-                x += 1;
-                cnt += 1;
-            }
-            longest = max(longest, cnt);
+void markRow(vector<vector<int>> &matrix, int n, int m, int i){
+    for(int j = 0; j < n; j++){
+        if(matrix[i][j] != 0){
+            matrix[i][j] = -1;
         }
     }
-    return longest;
+}
+
+void markCol(vector<vector<int>> &matrix, int n, int m, int j){
+    for(int i = 0; i < n; i++){
+        if(matrix[i][j] != 0){
+            matrix[i][j] = -1;
+        }
+    }
+}
+
+vector<vector<int>> zeroMatrix(vector<vector<int>>& matrix, int n, int m) {
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            if(matrix[i][j] == 0){
+                markRow(matrix, n, m, i);
+                markCol(matrix, n, m, j);
+            }
+        }
+    }
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            if(matrix[i][j] == -1){
+                matrix[i][j] = 0;
+            }
+        }
+    }
+    return matrix;
 }
