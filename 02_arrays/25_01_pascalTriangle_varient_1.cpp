@@ -18,8 +18,8 @@ int pascalTriangleElement(int r, int c){
 
 int main()
 {
-    int r = 5;
-    int c = 3;
+    int r = 7;
+    int c = 4;
     int element = pascalTriangleElement(r, c);
     cout << "The element at position (r,c) is " << element << endl;
     return 0;
