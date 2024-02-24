@@ -3,6 +3,8 @@
 #include<vector>
 using namespace std;
 
+//----------------------------BRUTE FORCE------------------------------------
+
 vector<vector<int>> mergeOverlappingIntervals(vector<vector<int>> &arr) {
     int n = arr.size();
     
@@ -30,12 +32,35 @@ vector<vector<int>> mergeOverlappingIntervals(vector<vector<int>> &arr) {
     return ans;
 }
 
+//----------------------------------------------------------------
+
+//---------------------OPTIMAL APPROACH-------------------------------------------
+
+vector<vector<int>> mergeOptimal(vector<vector<int>>& intervals) {
+        int n = intervals.size();
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> ans;
+
+        for(int i = 0; i < n; i++){
+            if(ans.empty() || intervals[i][0] > ans.back()[1]){
+                ans.push_back(intervals[i]);
+            } else{
+                ans.back()[1] = max(ans.back()[1], intervals[i][1]);
+            }
+
+        }
+        return ans;
+    }
+
+//----------------------------------------------------------------
+
 int main()
 {
     vector<vector<int>> arr = {{1, 3}, {8, 10}, {2, 6}, {15, 18}};
     vector<vector<int>> ans = mergeOverlappingIntervals(arr);
+    vector<vector<int>> ans2 = mergeOptimal(arr);
     cout << "The merged intervals are: " << "\n";
-    for (auto it : ans) {
+    for (auto it : ans2) {
         cout << "[" << it[0] << ", " << it[1] << "] ";
     }
     cout << endl;
