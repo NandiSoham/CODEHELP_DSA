@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 //-----------------------BRUTE FORCE -----------------------------------------
@@ -80,6 +81,28 @@ void mergeUsingGap(vector<int>& nums1, int n, vector<int>& nums2, int m) {
 
 //----------------------------------------------------------------
 
+//------------------------OPTIMAL----------------------------------------
+void mergeOptimal(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int left = m - 1;
+        int right  = 0;
+        int k = 0;
+
+        while(left >= 0 && right < n){
+            if(nums1[left] > nums2[right]){
+                swap(nums1[left], nums2[right]);
+                left--, right++;
+            }
+            else{
+                break;
+            }
+        }
+
+        
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
+    }
+//----------------------------------------------------------------
+
 int main()
 {
     vector<int> nums1{1, 4, 8, 10};
@@ -87,7 +110,8 @@ int main()
     int n = 4, m = 3;
     
     // mergeArrayBruteForce(nums1, n, nums2, m);
-    mergeUsingGap(nums1, n, nums2, m);
+    // mergeUsingGap(nums1, n, nums2, m);
+    mergeOptimal(nums1, n, nums2, m);
     cout << "The merged arrays are: " << "\n";
     cout << "nums1[] = ";
     for (int i = 0; i < n; i++) {
