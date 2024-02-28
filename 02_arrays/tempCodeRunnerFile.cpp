@@ -1,1 +1,3 @@
-{{1, 3}, {8, 10}, {2, 6}, {15, 18}}
+        if(i < n) nums1[i] = nums3[i];
+            else nums2[i - n] = nums3[i];
+        }
