@@ -1,1 +1,1 @@
-search
+int lowerBoundIndexBrute = lowerBoundBrute(arr, n, target);
