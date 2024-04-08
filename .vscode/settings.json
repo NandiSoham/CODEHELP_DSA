@@ -51,5 +51,6 @@
         "unordered_set": "cpp",
         "xhash": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "DockerRun.DisableDockerrc": true
 }
