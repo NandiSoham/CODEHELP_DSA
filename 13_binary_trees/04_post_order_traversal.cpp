@@ -12,20 +12,20 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-void findInorder(TreeNode *root, vector<int> &ans)
+void findPostorder(TreeNode *root, vector<int> &ans)
 {
     if (root == NULL)
         return;
 
-    findInorder(root->left, ans);
+    findPostorder(root->left, ans);
+    findPostorder(root->right, ans);
     ans.push_back(root->val);
-    findInorder(root->right, ans);
 }
 
-vector<int> inorderTraversal(TreeNode *root)
+vector<int> postorderTraversal(TreeNode *root)
 {
     vector<int> ans;
-    findInorder(root, ans);
+    findPostorder(root, ans);
     return ans;
 }
 
@@ -37,9 +37,9 @@ int main()
     root->left->left = new TreeNode(4);
     root->left->right = new TreeNode(5);
 
-    vector<int> result = inorderTraversal(root);
+    vector<int> result = postorderTraversal(root);
 
-    cout << "Inorder Traversal: ";
+    cout << "Postorder Traversal: ";
     for(int val : result) {
         cout << val << " ";
     }
