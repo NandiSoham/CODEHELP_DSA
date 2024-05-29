@@ -27,12 +27,15 @@ void printLL(Node* head) {
     }
 }
 
-Node* deleteHead(Node* head){
-    if(!head) return NULL;
+Node* deleteTail(Node* head){
+    if(head == NULL || head->next == NULL) return NULL;
 
-    Node* temp = head;
-    head = head->next;
-    delete temp;
+    Node* tail = head;
+    while(tail->next->next != NULL){
+        tail = tail->next;
+    }
+    delete tail->next;
+    tail->next = NULL;
     return head;
 }
 
@@ -44,6 +47,6 @@ int main() {
     head->next->next = new Node(arr[2]);
     head->next->next->next = new Node(arr[3]);
 
-    head = deleteHead(head);
+    head = deleteTail(head);
     printLL(head);
 }
