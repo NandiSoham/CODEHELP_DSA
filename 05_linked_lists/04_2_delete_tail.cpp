@@ -19,6 +19,24 @@ public:
     }
 };
 
+
+Node *constructLL(vector<int> &arr)
+{
+    if (arr.empty())
+        return NULL; // Check if the array is empty
+
+    Node *head = new Node(arr[0]);
+    Node *mover = head;
+
+    for (int i = 1; i < arr.size(); i++)
+    {
+        Node *temp = new Node(arr[i]);
+        mover->next = temp;
+        mover = temp;
+    }
+    return head;
+}
+
 // Function to print the linked list starting from the given head
 void printLL(Node* head) {
     while (head != NULL) {
@@ -42,11 +60,10 @@ Node* deleteTail(Node* head){
 int main() {
     // Example array
     vector<int> arr = {12, 5, 8, 7};
-    Node* head = new Node(arr[0]);
-    head->next = new Node(arr[1]);
-    head->next->next = new Node(arr[2]);
-    head->next->next->next = new Node(arr[3]);
-
+    Node * head = constructLL(arr);
+    cout << "LinkedList before deleting tail : " ;
+    printLL(head);
+    cout << endl<< "LinkedList after deleting tail : ";
     head = deleteTail(head);
     printLL(head);
 }

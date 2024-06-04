@@ -1,26 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Node
-{
+class Node {
 public:
     int data;
-    Node *next;
-
+    Node* next;
+  
     // Default constructor
-    Node()
-    {
+    Node() {
         data = 0;
         next = NULL;
     }
-
+  
     // Parameterized Constructor
-    Node(int data)
-    {
+    Node(int data) {
         this->data = data;
         this->next = NULL;
     }
 };
+
 
 Node *constructLL(vector<int> &arr)
 {
@@ -40,34 +38,45 @@ Node *constructLL(vector<int> &arr)
 }
 
 // Function to print the linked list starting from the given head
-void printLL(Node *head)
-{
-    while (head != NULL)
-    {
+void printLL(Node* head) {
+    while (head != NULL) {
         cout << head->data << " ";
         head = head->next;
     }
 }
 
-Node *deleteHead(Node *head)
-{
-    if (!head)
-        return NULL;
+Node* deleteElement(Node* head, int element){
+    if(head == NULL) return head;
 
-    Node *temp = head;
-    head = head->next;
-    delete temp;
+    if(head->data == element){
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return head;
+    }
+
+    Node* temp = head;
+    Node* prev = NULL;
+
+    while(temp != NULL){
+        if(temp->data == element){
+            prev->next = prev->next->next;
+            delete temp;
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
     return head;
 }
 
-int main()
-{
+int main() {
     // Example array
-    vector<int> arr = {12, 5, 8, 7};
+    vector<int> arr = {12, 5, 8, 7, 56};
     Node * head = constructLL(arr);
-    cout << "LinkedList before deleting head : " ;
+    cout << "LinkedList before deleting mentioned Element : " ;
     printLL(head);
-    cout << endl<< "LinkedList after deleting head : ";
-    head = deleteHead(head);
+    cout << endl<< "LinkedList after deleting mentioned Element : ";
+    head = deleteElement(head, 7);
     printLL(head);
 }
