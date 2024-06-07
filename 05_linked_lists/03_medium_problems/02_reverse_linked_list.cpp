@@ -22,6 +22,8 @@ public:
     }
 };
 
+// --------------------------------- Approach - 1 ----------------------------
+
 Node *reverseListApproach1(Node *head)
 {
     Node *temp = head;
@@ -41,6 +43,23 @@ Node *reverseListApproach1(Node *head)
     return head;
 }
 
+//----------------------------------------------------------------------------
+
+// --------------------------------- Approach - 2 ----------------------------
+
+Node *reverseListApproach2(Node *head)
+{
+    Node *temp = head;
+    Node *prev = NULL;
+    while (temp != NULL)
+    {
+        Node *front = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = front;
+    }
+    return prev;
+}
 
 // Function to print the linked list
 void printLinkedList(Node *head)
@@ -57,16 +76,16 @@ void printLinkedList(Node *head)
 int main()
 {
 
-    Node *head = new Node(1);
+    Node *head = new Node(7);
     head->next = new Node(3);
-    head->next->next = new Node(2);
-    head->next->next->next = new Node(4);
-
+    head->next->next = new Node(98);
+    head->next->next->next = new Node(34);
 
     cout << "Original Linked List: ";
     printLinkedList(head);
 
-    head = reverseListApproach1(head);
+    // head = reverseListApproach1(head);
+    head = reverseListApproach2(head);
 
     cout << "Reversed Linked List: ";
     printLinkedList(head);
