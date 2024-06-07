@@ -61,6 +61,27 @@ Node *reverseListApproach2(Node *head)
     return prev;
 }
 
+//----------------------------------------------------------------------------
+
+// --------------------------------- Approach - 3 (Recursive Approach) ----------------------------
+
+Node *reverseListApproach3(Node *head)
+{
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+
+    Node *newHead = reverseListApproach3(head->next);
+    Node *front = head->next;
+    front->next = head;
+    head->next = NULL;
+
+    return newHead;
+}
+
+//----------------------------------------------------------------------------
+
 // Function to print the linked list
 void printLinkedList(Node *head)
 {
@@ -76,16 +97,17 @@ void printLinkedList(Node *head)
 int main()
 {
 
-    Node *head = new Node(7);
-    head->next = new Node(3);
-    head->next->next = new Node(98);
-    head->next->next->next = new Node(34);
+    Node *head = new Node(27);
+    head->next = new Node(31);
+    head->next->next = new Node(9);
+    head->next->next->next = new Node(354);
 
     cout << "Original Linked List: ";
     printLinkedList(head);
 
     // head = reverseListApproach1(head);
-    head = reverseListApproach2(head);
+    // head = reverseListApproach2(head);
+    head = reverseListApproach3(head);
 
     cout << "Reversed Linked List: ";
     printLinkedList(head);
