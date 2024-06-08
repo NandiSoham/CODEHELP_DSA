@@ -22,7 +22,9 @@ public:
     }
 };
 
-bool hasCycle(Node *head)
+//-------------------------------- BRUTE FORCE APPROACH-----------------------------
+
+bool hasCycleUsingBruteForce(Node *head)
 {
     Node *temp = head;
     std::unordered_map<Node *, int> nodeMap;
@@ -35,6 +37,26 @@ bool hasCycle(Node *head)
         }
         nodeMap[temp] = 1;
         temp = temp->next;
+    }
+    return false;
+}
+
+//----------------------------------------------------------------------------------
+
+//-------------------------------- OPTIMAL APPROACH USING 'Tortoise and Hare Algorithm'-----------------------------
+
+bool hasCycleUsingTortoiseAndHare(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head;
+
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+            return true;
     }
     return false;
 }
@@ -55,7 +77,9 @@ int main()
     fifth->next = third;
 
     // Check if there is a loop
-    if (hasCycle(head))
+
+    // if (hasCycleUsingBruteForce(head))
+    if (hasCycleUsingTortoiseAndHare(head))
     {
         cout << "Loop detected in the linked list." << endl;
     }
