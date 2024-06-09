@@ -23,7 +23,9 @@ public:
     }
 };
 
-Node *detectCycle(Node *head)
+//-------------------------------- BRUTE FORCE APPROACH-----------------------------
+
+Node *detectCycleBruteForce(Node *head)
 {
     Node *temp = head;
     unordered_map<Node *, int> mpp;
@@ -40,6 +42,37 @@ Node *detectCycle(Node *head)
     return NULL;
 }
 
+//----------------------------------------------------------------------------------
+
+//--------------------------------- OPTIMAL APPROACH -------------------------------
+
+Node *detectCycleOptimal(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head;
+
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+        {
+            slow = head;
+            while (slow != fast)
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+            return slow;
+        }
+    }
+    return NULL;
+}
+
+//----------------------------------------------------------------------------------
+
+
 int main()
 {
     // Create a sample linked list with a loop
@@ -53,12 +86,13 @@ int main()
     Node *node5 = new Node(5);
     node4->next = node5;
     // Make a loop from node5 to node2
-    node5->next = node2;
+    node5->next = node3;
 
     // Set the head of the linked list
     Node *head = node1;
 
-    Node *loopStartNode = detectCycle(head);
+    // Node *loopStartNode = detectCycleBruteForce(head);
+    Node *loopStartNode = detectCycleOptimal(head);
 
     if (loopStartNode)
     {
