@@ -50,29 +50,77 @@ bool isPalindromeApproach1(Node *head)
 
 // ------------------------------ Approach -2 ----------------------------
 
-bool isPalindrome(Node* head) {
+bool isPalindromeApproach2(Node *head)
+{
     stack<int> st;
-    Node* temp = head;
+    Node *temp = head;
 
-    while (temp != NULL) {
-        st.push(temp->data); 
-        temp = temp->next;  
+    while (temp != NULL)
+    {
+        st.push(temp->data);
+        temp = temp->next;
     }
 
     temp = head;
-    while (temp != NULL) {
-        if (temp->data != st.top()) {
-            return false; 
+    while (temp != NULL)
+    {
+        if (temp->data != st.top())
+        {
+            return false;
         }
 
-        st.pop();         
-        temp = temp->next; 
+        st.pop();
+        temp = temp->next;
     }
 
     return true;
 }
 
 // -----------------------------------------------------------------------
+
+// ------------------------------ Approach -3 ----------------------------
+
+Node *reverseList(Node *head)
+{
+    if (head == NULL || head->next == NULL)
+        return head;
+
+    Node *newHead = reverseList(head->next);
+    Node *frontNode = head->next;
+    frontNode->next = head;
+    head->next = NULL;
+
+    return newHead;
+}
+
+bool isPalindromeApproach3(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    Node *newHead = reverseList(slow->next);
+    Node *firstHalfPtr = head;
+    Node *secondHalfPtr = newHead;
+
+    while (secondHalfPtr != NULL)
+    {
+        if (firstHalfPtr->data != secondHalfPtr->data)
+        {
+            reverseList(newHead);
+            return false;
+        }
+        firstHalfPtr = firstHalfPtr->next;
+        secondHalfPtr = secondHalfPtr->next;
+    }
+    reverseList(newHead);
+    return true;
+}
 
 void printLinkedList(Node *head)
 {
@@ -88,16 +136,15 @@ void printLinkedList(Node *head)
 int main()
 {
     Node *head = new Node(1);
-    head->next = new Node(5);
+    head->next = new Node(7);
     head->next->next = new Node(2);
-    head->next->next->next = new Node(5);
+    head->next->next->next = new Node(7);
     head->next->next->next->next = new Node(1);
-
 
     cout << "Original Linked List: ";
     printLinkedList(head);
 
-    if (isPalindromeApproach1(head))
+    if (isPalindromeApproach3(head))
     {
         cout << "The linked list is a palindrome." << endl;
     }
