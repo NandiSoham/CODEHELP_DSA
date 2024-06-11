@@ -48,6 +48,32 @@ bool isPalindromeApproach1(Node *head)
 
 // -----------------------------------------------------------------------
 
+// ------------------------------ Approach -2 ----------------------------
+
+bool isPalindrome(Node* head) {
+    stack<int> st;
+    Node* temp = head;
+
+    while (temp != NULL) {
+        st.push(temp->data); 
+        temp = temp->next;  
+    }
+
+    temp = head;
+    while (temp != NULL) {
+        if (temp->data != st.top()) {
+            return false; 
+        }
+
+        st.pop();         
+        temp = temp->next; 
+    }
+
+    return true;
+}
+
+// -----------------------------------------------------------------------
+
 void printLinkedList(Node *head)
 {
     Node *temp = head;
