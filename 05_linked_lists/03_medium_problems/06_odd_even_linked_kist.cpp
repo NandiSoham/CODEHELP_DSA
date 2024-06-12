@@ -63,7 +63,30 @@ Node *oddEvenListApproach1(Node *head)
 
 // -----------------------------------------------------------------------
 
+// ------------------------------ Approach -2 ----------------------------
 
+Node *oddEvenListApproach2(Node *head)
+{
+    if (!head || !head->next)
+        return head;
+    Node *odd = head;
+    Node *even = head->next;
+    Node *evenStart = even;
+
+    while (even && even->next)
+    {
+        odd->next = odd->next->next;
+        odd = odd->next;
+
+        even->next = even->next->next;
+        even = even->next;
+    }
+
+    odd->next = evenStart;
+    return head;
+}
+
+// -----------------------------------------------------------------------
 
 void printLinkedList(Node *head)
 {
@@ -81,13 +104,14 @@ int main()
     Node *head = new Node(1);
     head->next = new Node(2);
     head->next->next = new Node(3);
-    head->next->next->next = new Node(4);
+    head->next->next->next = new Node(7);
     head->next->next->next->next = new Node(5);
+    head->next->next->next->next->next = new Node(6);
 
     cout << "Original Linked List: ";
     printLinkedList(head);
 
-    head = oddEvenListApproach1(head);
+    head = oddEvenListApproach2(head);
 
     cout << "Reordered Linked List: ";
     printLinkedList(head);
