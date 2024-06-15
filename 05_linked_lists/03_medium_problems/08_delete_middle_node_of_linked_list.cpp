@@ -91,22 +91,49 @@ Node *deleteMiddleApproach2(Node *head)
 
 // -----------------------------------------------------------------------
 
+// ------------------------------ Approach -3 ----------------------------
+
+Node *deleteMiddleApproach3(Node *head)
+{
+    if (head == NULL || head->next == NULL)
+        return NULL;
+
+    Node *slow = head;
+    Node *fast = head->next->next;
+
+    while (fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    Node *delNode = slow->next;
+    slow->next = slow->next->next;
+    delete (delNode);
+
+    return head;
+}
+
+// -----------------------------------------------------------------------
+
 int main()
 {
-    Node *head = new Node(46);
-    head->next = new Node(2);
-    head->next->next = new Node(13);
-    head->next->next->next = new Node(56);
-    head->next->next->next->next = new Node(37);
-    head->next->next->next->next->next = new Node(69);
+    Node *head = new Node(41);
+    head->next = new Node(12);
+    head->next->next = new Node(132);
+    head->next->next->next = new Node(6);
+    head->next->next->next->next = new Node(71);
+    head->next->next->next->next->next = new Node(39);
     head->next->next->next->next->next->next = new Node(18);
+    head->next->next->next->next->next->next->next = new Node(21);
 
     cout << "Original Linked List: ";
     printLL(head);
     cout << endl;
 
     // head = deleteMiddleApproach1(head);
-    head = deleteMiddleApproach2(head);
+    // head = deleteMiddleApproach2(head);
+    head = deleteMiddleApproach3(head);
 
     cout << "After Deleting Middle Node: ";
     printLL(head);
