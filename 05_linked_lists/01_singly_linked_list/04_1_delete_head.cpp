@@ -51,10 +51,8 @@ void printLL(Node *head)
 
 Node *deleteHead(Node *head)
 {
-    if (!head)
-        return NULL;
-
-    Node *temp = head;
+    if(!head) return NULL;
+    Node* temp = head;
     head = head->next;
     delete temp;
     return head;
@@ -63,7 +61,7 @@ Node *deleteHead(Node *head)
 int main()
 {
     // Example array
-    vector<int> arr = {12, 5, 8, 7};
+    vector<int> arr = {123, 46, 8, 12, 25, 8, 7};
     Node * head = constructLL(arr);
     cout << "LinkedList before deleting head : " ;
     printLL(head);
