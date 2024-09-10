@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution{    
     public:
     int findMaximumCookieStudents(vector<int>& Student, vector<int>& Cookie){
@@ -18,3 +21,20 @@ class Solution{
         return leftPtr;
     }
 };
+
+int main() {
+    // Example input
+    vector<int> Student = {1, 2};
+    vector<int> Cookie = {1, 2, 3};
+
+    // Create a Solution object
+    Solution solution;
+
+    // Call the findMaximumCookieStudents function
+    int result = solution.findMaximumCookieStudents(Student, Cookie);
+
+    // Output the result
+    cout << "Number of students satisfied: " << result << endl;
+
+    return 0;
+}
